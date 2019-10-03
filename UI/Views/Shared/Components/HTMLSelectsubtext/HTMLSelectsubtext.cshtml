@@ -1,0 +1,36 @@
+﻿
+@model UI.Views.Shared.Components.HTMLSelect.HTMLSelectsubtextViewComponent.OutputModel
+
+<div>
+    @if (!string.IsNullOrEmpty(Model.Label))
+    {
+        <label for="@Model.Name" class="control-label">@Model.Label</label>
+    }
+
+    <select name="@Model.Name"
+            id='@(Model.Name + "id" )'
+            class="form-control bg-primary"
+            onchange="@(Model.Name)changehandler(this)" >      
+            
+        @foreach (var I in Model.Options)
+        {
+            <option value="@I.Value" selected="@I.Selected" data-subtext="@I.SubText">@I.Text</option>
+        }
+        ></select>
+    <span  id='@(Model.Name + "Span" )'  class="text-danger field-validation-valid"></span>
+
+
+    <p id="@(Model.Name + "DetailId")">
+        @Html.Raw(@Model.subtext)
+    </p>
+
+    <script>
+        function  @(Model.Name)changehandler(event)
+        {
+            document.getElementById('@(Model.Name + "DetailId")').innerHTML = event.selectedOptions[0].getAttribute('data-subtext');
+            document.getElementById('@(Model.Name + "Span" )').innerHTML = "";
+            ProcessSelection("@Model.Name");
+        }
+    </script>
+
+</div>

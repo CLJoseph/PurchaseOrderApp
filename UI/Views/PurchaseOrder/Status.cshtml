@@ -1,0 +1,69 @@
+﻿@model Models.ViewModels.PurchaseOrderStatusViewModel
+
+<div>
+    <h1>Alter purchase order status</h1>
+</div>
+
+
+<hr />
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<form action="NewStatus" method="post" >
+    <div class="row">
+        <input asp-for="Id" hidden />
+        <div class="col-9">
+            <vc:HTML-Select label="Alter Status"
+                            name="NewStatus"
+                            on-change-eventhandler=""
+                            selectedoption="Status"
+                            options=Model.NewStatus>
+            </vc:HTML-Select>
+        </div>
+        <div class="col-3">
+            <input type="submit"  class="btn btn-block btn-block btn-primary" style="height:100%; width:100%" value="Set Status">
+        </div>
+    </div>
+</form>
+
+
+
+<div class="row">
+    <div class="col-12 col-md-4">
+        <div class="form-group">
+            <label asp-for="Code" class="control-label"></label>
+            <input asp-for="Code" class="form-control" disabled />
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="form-group">
+            <label asp-for="DateRaised" class="control-label">Date Raised</label>
+            <input asp-for="DateRaised" class="form-control" disabled />
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="form-group">
+            <label asp-for="Status" class="control-label"></label>
+            <input asp-for="Status" class="form-control" disabled />
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="form-group">
+            <label asp-for="Note" class="control-label"></label>
+            <textarea asp-for="Note" class="form-control" rows="3" disabled></textarea>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <a asp-controller="PurchaseOrder" asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

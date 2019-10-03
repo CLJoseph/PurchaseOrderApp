@@ -1,0 +1,311 @@
+﻿@model Models.ViewModels.PurchaseOrderViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: lightblue;
+            color: black;
+            font: bold 16px arial;
+            border-collapse: collapse;
+            background-color: darkseagreen;
+        }
+
+        p {
+            color: black;
+            font: 18px arial;
+            width: auto;
+            margin: 0px;
+            border: 0px;
+            padding: 0px
+        }
+
+            p.POheading {
+                text-align: left;
+                font-size: 32px;
+                font-weight: normal;
+                color: black;
+            }
+
+            p.Section {
+                font-family: Arial;
+                text-align: left;
+                font-size: 20px;                
+                color: blue;
+            }
+
+            p.Section1 {
+                font-family: Arial;
+                text-align: left;
+                font-size: 20px;
+                color: blue;
+                background-color: bisque;
+                padding-top:5px;
+                padding-bottom:5px;
+                padding-left:3px;
+            }
+
+
+        table {
+            width: 95%;
+            background-color: darkseagreen;
+            
+            margin: 0;
+            padding: 0;
+        }
+
+        td {
+            vertical-align: top;
+            text-align: left;
+            background-color: darkseagreen;
+        }
+
+
+
+            td.table {
+            }
+
+            td.celldisplay {
+                background-color: bisque;
+            }
+
+            td.standardwidth {
+                width:8%;
+            }
+
+        th {
+            font: bold 12px arial;
+            background-color: darkseagreen;
+        }
+
+        tr {
+        }
+
+            tr.RowBackground {
+                background-color: bisque;
+            }
+
+            tr.RowBackgroundLine {
+                height: 10px;
+                background-color: bisque;
+            }
+    </style>
+</head>
+
+<body>
+    <table align="center">
+        <thead>
+            <tr>
+                <th colspan="2">
+                    <p class="POheading">Purchase Order :</p>
+                </th>
+                <th colspan="2">
+                    <p class="POheading"> @Model.Code</p>
+                </th>
+            </tr>
+
+            <tr>
+                <th colspan="2">
+                    <p class="POheading">Date</p>
+                </th>
+                <th colspan="2">
+                    <p class="POheading"> @Model.DateRaised</p>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="4">
+                    <h2 class="POheading" style="color:Red">This is an example PO NOT an actual one.</h2>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="4">
+                    <hr />
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+           
+            <tr style="height:10px">
+                <td style="width:15%"></td>
+                <td style="width:35%"></td>
+                <td style="width:15%"></td>
+                <td style="width:35%"></td>
+            </tr>
+            <tr>
+                <td><p>From:</p></td>
+                <td class="celldisplay">
+                    <p class="Section">@Html.Raw(Model.FromDetail)</p>
+                </td>
+                <td><p>To:</p></td>
+                <td class="celldisplay">
+                    <p class="Section"> @Html.Raw(Model.ToDetail)</p>
+                </td>
+            </tr>
+            <tr style="height:10px">
+                <td colspan="4"></td>
+            </tr>
+            <tr>
+                <td><p>Deliver To:</p></td>
+                <td class="celldisplay">
+                    <p class="Section">@Html.Raw(Model.DeliverToDetail)</p>
+                </td>
+
+                <td><p>Invoice To:</p></td>
+                <td class="celldisplay">
+                    <p class="Section">@Html.Raw(Model.InvoiceToDetail)</p>
+                </td>
+
+            </tr>
+            <tr style="height:10px">
+                <td colspan="4"></td>
+            </tr>
+            <tr>
+                <td><p>Required by :</p></td>
+                <td class="celldisplay" colspan="3">
+                    <p class="Section">@Model.DateRequired</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <p class="Section"></p>
+                </td>
+            </tr>
+            <tr>
+                <td><p>Notes :</p></td>
+                <td class="celldisplay" colspan="3" style="height:100px" >
+                    <p class="Section">@Model.Note</p>
+                </td>
+            </tr>
+            <tr style="height : 10px">
+                <td colspan="4"></td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    <table style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th  class="standardwidth"></th>
+                                <th  class="standardwidth"></th>
+                                <th  class="standardwidth"></th>
+                                <th  class="standardwidth"></th>
+                                <th  class="standardwidth"></th>
+                                <th  class="standardwidth"></th>
+                                <th  class="standardwidth"></th>
+                                <th  class="standardwidth"></th>
+                                <th  class="standardwidth"></th>
+                                <th  class="standardwidth"></th>
+                                <th  class="standardwidth"></th>
+                                <th  class="standardwidth"></th>
+                            </tr>
+                            <tr>
+                                <td colspan="12">
+                                    <p style="text-align:center; font:bold 16px; ">Items Required</p>
+                                    <hr />
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var I in Model.Items)
+                            {
+                              
+                                <tr class="RowBackground"></tr>
+                                <tr >
+                                    <td colspan="1">
+                                        <p>Code</p>
+                                        <p class="Section1">@I.Code</p>
+                                    </td>
+                                    <td colspan="2">
+                                        <p>Brand</p>
+                                        <p class="Section1">@I.Brand</p>
+                                    </td>
+                                    <td colspan="5">
+                                        <p>Name</p>
+                                        <p class="Section1">@I.Name</p>
+                                    </td>
+
+                                    <td colspan="2">
+                                        <p>Quantity</p>
+                                        <p class="Section1">@I.Quantity</p>
+                                    </td>
+                                    <td colspan="2">
+                                        <p>Price</p>
+                                        <p class="Section1">@I.Price</p>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="8">
+                                        <p>Description</p>
+                                        <p class="Section1">@I.Description</p>
+                                    </td>
+                                    <td colspan="2">
+                                        <p>Tax</p>
+                                        <p class="Section1">@I.Tax</p>
+                                    </td>
+                                    <td colspan="2">
+                                        <p>Total</p>
+                                        <p class="Section1">@I.Total</p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                   
+                                    <td colspan="12"><hr /></td>
+                                </tr>
+                       
+
+                            }
+
+                            <tr style="background-color:black">
+                                    <td class="standardwidth"></td>
+                                    <td class="standardwidth"></td>
+                                    <td class="standardwidth"></td>
+                                    <td class="standardwidth"></td>
+                                    <td class="standardwidth"></td>
+                                    <td class="standardwidth"></td>
+                                    <td class="standardwidth"></td>
+                                    <td class="standardwidth"></td>
+                                    <td class="standardwidth"></td>
+                                    <td class="standardwidth"></td>
+                                    <td class="standardwidth"></td>
+                                    <td class="standardwidth"></td>
+                                </tr>
+                            <tr>
+                                <td colspan="8"></td>                                
+                                <td colspan="2"><p>Price</p></td>
+                                <td colspan="2"><p class="Section1">@Model.Price</p></td>
+                            </tr>
+                            <tr>
+                                <td colspan="8"></td>                                
+                                <td colspan="2"><p>Tax</p></td>
+                                <td colspan="2"><p class="Section1">@Model.Tax</p></td>
+                            </tr>
+                            <tr>                                
+                                <td colspan="8"></td>
+                                <td colspan="2"><p>Total</p></td>
+                                <td colspan="2"><p class="Section1">@Model.Total</p></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <hr />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <footer>
+        <h2>
+            <a href="https://localhost:44397/PurchaseOrder/Display/@Model.Id.ToString()">View PO details in Browser</a>
+        </h2>
+    </footer>
+
+</body>
+</html>

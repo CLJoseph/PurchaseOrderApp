@@ -1,0 +1,89 @@
+﻿@model Models.ViewModels.PurchaseOrderItemViewModel
+
+
+<div id="@("Item_"+ Model.Id)" style="background-color:burlywood" class="PurchaseOrderItem">
+    <input id="@("Item_" + Model.Id + "TaxCodeId")" value="@Model.TaxCode" hidden/>
+    <input id="@("Item_" + Model.Id + "DBLineId")"  value="@Model.Id" hidden />
+
+    <div class="row no-gutters">
+        <div class="col-12  col-md-11 no-gutters" style="background-color:darkcyan">
+            <div class="row col-12 no-gutters">
+                <div class="col-12 col-md-2">
+                    <div class="form-group form-group-overide">
+                        <label asp-for="Code" class="control-label control-label-overide"></label>
+                        <input asp-for="Code" class="form-control" id="@("Item_"+ Model.Id + "CodeId")" disabled />
+                    </div>
+                </div>
+                <div class="col-12 col-md-2">
+                    <div class="form-group form-group-overide">
+                        <label asp-for="Brand" class="control-label control-label-overide" ></label>
+                        <input asp-for="Brand" class="form-control" disabled id="@("Item_"+ Model.Id +"BrandId")" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="form-group form-group-overide">
+                        <label asp-for="Name" class="control-label control-label-overide" ></label>
+                        <input asp-for="Name" class="form-control" disabled id="@("Item_"+ Model.Id + "NameId")" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-2">
+                    <div class="form-group form-group-overide">
+                        <label class="control-label control-label-overide" ></label>
+                        <input class="form-control" name="@("QuantityInput_" + Model.Id)" id="@("Item_" + Model.Id + "QuantityId")" onchange="TallyItems()"
+                               type="text"
+                               data-val-required="This field is required."
+                               data-val-regex-pattern="\d+(\.\d{1,2})?"
+                               data-val-regex="Invalid Quantity"
+                               data-val="true"
+                               value="@Model.Quantity" />
+                        <span class="text-danger field-validation-valid"
+                              data-valmsg-replace="true"
+                              data-valmsg-for="@("QuantityInput_" + Model.Id)"></span>
+                    </div>
+                </div>
+                <div class="col-12 col-md-2">
+                    <div class="form-group form-group-overide">
+                        <label class="control-label control-label-overide"></label>
+                        <input class="form-control" name="@("PriceInput_" + Model.Id)" id="@("Item_" + Model.Id+ "PriceId" )" onchange="TallyItems()"
+                               type="text"
+                               data-val-required="This field is required."
+                               data-val-regex-pattern="\d+(\.\d{1,2})?"
+                               data-val-regex="Invalid Price"
+                               data-val="true"
+                               value="@Model.Price" />
+                        <span class="text-danger field-validation-valid"
+                              data-valmsg-replace="true"
+                              data-valmsg-for="@("PriceInput_" + Model.Id)"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-12 no-gutters">
+                <div class="col-12 col-md-8 no-gutters">
+                    <div class="form-group form-group-overide ">
+                        <label asp-for="Description" class="control-label control-label-overide "></label>
+                        <input asp-for="Description" class="form-control" disabled id="@("Item_"+ Model.Id +"DescriptionId")" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-2 no-gutters no-padding">
+                    <div class="form-group form-group-overide">
+                        <label asp-for="Tax" class="control-label control-label-overide"></label>
+                        <input asp-for="Tax" class="form-control" disabled id="@("Item_"+ Model.Id + "TaxId")" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-2 no-gutters no-padding">
+                    <div class="form-group form-group-overide ">
+                        <label asp-for="Total" class="control-label control-label-overide"></label>
+                        <input asp-for="Total" class="form-control" disabled id="@("Item_"+ Model.Id + "TotalId")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-1 ">
+            <button type="button"
+                    class="btn btn-block btn-primary" 
+                    style="height:100%"
+                    onclick="RemoveItem('@("Item_" + Model.Id)')"   >Remove <br /> Item</button>
+        </div>
+    </div>
+
+</div>

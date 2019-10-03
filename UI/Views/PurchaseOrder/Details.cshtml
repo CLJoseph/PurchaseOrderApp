@@ -1,0 +1,139 @@
+﻿@model Models.ViewModels.PurchaseOrderViewModel
+<h1>Purchase order</h1>
+<hr />
+
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="row">
+    <div class="col-12 col-md-4">
+        <div class="form-group">
+            <label asp-for="Code" class="control-label"></label>
+            <input asp-for="Code" class="form-control" disabled />
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <div class="form-group">
+            <label asp-for="DateRaised" class="control-label">Date Raised</label>
+            <input asp-for="DateRaised" class="form-control" disabled />
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <div class="form-group">
+            <label asp-for="Status" class="control-label"></label>
+            <input asp-for="Status" class="form-control" disabled />
+        </div>
+    </div>
+</div>
+<div class="row">    
+    <div class="col-12"> <h2 class="POheading" style="color:Red">This is an example PO NOT an actual one.</h2></div>
+    
+</div>
+
+
+
+
+<div class="row">
+
+    <div class="col-12 col-md-4">
+        <div class="form-group">
+            <label asp-for="Budget" class="control-label"></label>
+            <input asp-for="Budget" class="form-control" disabled />
+        </div>
+    </div>
+
+    <div class="col-12 col-md-8">
+        <div class="form-group">
+            <label asp-for="DateRequired" class="control-label">Date Required</label>
+            <input asp-for="DateRequired" class="form-control" disabled />
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="form-group">
+            <label asp-for="Note" class="control-label"></label>
+            <textarea asp-for="Note" class="form-control" rows="3" disabled></textarea>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12 col-md-4">
+        <div class="form-group">
+            <label asp-for="ToDetail" class="control-label">To</label>
+            <p>@(Html.Raw(Model.ToDetail))</p>
+
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="form-group">
+            <label asp-for="DeliverTo" class="control-label">Deliver to</label>
+            <p>@(Html.Raw(Model.DeliverToDetail))</p>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <div class="form-group">
+            <label asp-for="InvoiceTo" class="control-label">Invoice To</label>
+            <p>@(Html.Raw(Model.InvoiceToDetail))</p>
+
+        </div>
+    </div>
+</div>
+
+<h2>Items</h2>
+
+<div id="ItemsList">
+    @foreach (var Item in Model.Items)
+    {
+        <partial name="_partialPurchaseOrderItemReadOnly" model="Item" />
+        <br />
+    }
+</div>
+
+
+<div class="row">
+    <div class="col-9"></div>
+    <div class="col-3">
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" id="Priceid" disabled />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-9"></div>
+    <div class="col-3">
+        <div class="form-group">
+            <label asp-for="Tax" class="control-label"></label>
+            <input asp-for="Tax" class="form-control" id="Taxid" disabled />
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-9"></div>
+    <div class="col-3">
+        <div class="form-group">
+            <label asp-for="Total" class="control-label"></label>
+            <input asp-for="Total" class="form-control" id="Totalid" disabled />
+        </div>
+    </div>
+</div>
+
+
+
+
+<div>
+    <a asp-controller="PurchaseOrder" asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

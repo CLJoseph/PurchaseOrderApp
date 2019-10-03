@@ -1,0 +1,102 @@
+﻿
+<div class="modal fade" id="ModalNewAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form id="ModalNewAddressForm" data-OpenedBy="" data-Validationcheck="Notdone">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalNewAddressTitleid">Add Organisation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="ModalNewAddressOrganisation" class="control-label">Organisation</label>
+                        <input name="ModalNewAddressOrganisation" class="form-control" id="ModalNewAddressOrganisationid" type="text"
+                               maxlength="100"
+                               value=""
+                               data-val="true"
+                               data-val-required="This field is required."
+                               data-val-maxlength-max="100"
+                               data-val-maxlength="The field must be a string or array type with a maximum length of '100'.">
+                        <span class="text-danger field-validation-valid"
+                              data-valmsg-replace="true"
+                              data-valmsg-for="ModalNewAddressOrganisation"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ModalNewAddressContact" class="control-label">Contact</label>
+                        <input name="ModalNewAddressContact" class="form-control" id="ModalNewAddressContactid" type="text"
+                               value=""
+                               data-val="true"
+                               data-val-required="This field is required." />
+                        <span class="text-danger field-validation-valid"
+                              data-valmsg-replace="true"
+                              data-valmsg-for="ModalNewAddressContact"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ModalNewAddressEmail" class="control-label">Email</label>
+                        <input name="ModalNewAddressEmail" class="form-control" id="ModalNewAddressEmailid" type="email"
+                               value=""
+                               data-val="true"
+                               data-val-required="The Email field is required."
+                               data-val-email="The Email field is not a valid e-mail address." />
+                        <span class="text-danger field-validation-valid"
+                              data-valmsg-replace="true"
+                              data-valmsg-for="ModalNewAddressEmail"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Address</label>
+
+                        <input name="ModalNewAddressLine1" id="ModalNewAddressLine1id" value="" maxlength="100" class="form-control" placeholder="Line one"
+                               data-val="true"
+                               data-val-required="This field is required."
+                               data-val-maxlength="The field must be a string or array type with a maximum length of '100'."
+                               data-val-maxlength-max="100" />
+                        <span class="text-danger field-validation-valid" data-valmsg-replace="true" data-valmsg-for="ModalNewAddressLine1"></span>
+
+                        <input name="ModalNewAddressLine2" id="ModalNewAddressLine2id" value="" maxlength="100" class="form-control" placeholder="Line two"
+                               data-val="true"
+                               data-val-maxlength="The field must be a string or array type with a maximum length of '100'."
+                               data-val-maxlength-max="100" />
+                        <span class="text-danger field-validation-valid" data-valmsg-replace="true" data-valmsg-for="ModalNewAddressLine2"></span>
+
+                        <input name="ModalNewAddressLine3" id="ModalNewAddressLine3id" value="" maxlength="100" class="form-control" placeholder="Line three"
+                               data-val="true"
+                               data-val-maxlength="The field must be a string or array type with a maximum length of '100'."
+                               data-val-maxlength-max="100" />
+                        <span class="text-danger field-validation-valid" data-valmsg-replace="true" data-valmsg-for="ModalNewAddressLine3"></span>
+
+                        <input name="ModalNewAddressLine4" id="ModalNewAddressLine4id" value="" maxlength="100" class="form-control" placeholder="Line four"
+                               data-val="true"
+                               data-val-maxlength="The field must be a string or array type with a maximum length of '100'."
+                               data-val-maxlength-max="100" />
+                        <span class="text-danger field-validation-valid" data-valmsg-replace="true" data-valmsg-for="ModalNewAddressLine4"></span>
+
+                        <input name="ModalNewAddressLine5" id="ModalNewAddressLine5id" value="" maxlength="100" class="form-control" placeholder="Line four"
+                               data-val="true"
+                               data-val-maxlength="The field must be a string or array type with a maximum length of '100'."
+                               data-val-maxlength-max="100" />
+                        <span class="text-danger field-validation-valid" data-valmsg-replace="true" data-valmsg-for="ModalNewAddressLine5"></span>
+
+                        <input name="ModalNewAddressCode" id="ModalNewAddressCodeid" value="" class="form-control" placeholder="Address Post\zip code"
+                               data-val="true"
+                               data-val-required="Address code is required."
+                               data-val-maxlength="The field must be a string or array type with a maximum length of '15'."
+                               data-val-maxlength-max="15" />
+                        <span class="text-danger field-validation-valid" data-valmsg-replace="true" data-valmsg-for="ModalNewAddressCode"></span>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="SaveAddressModal()">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+

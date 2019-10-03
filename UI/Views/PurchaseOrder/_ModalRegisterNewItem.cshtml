@@ -1,0 +1,100 @@
+﻿
+<div class="modal fade" id="ModalRegisterNewItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form id="ModalRegisterNewItemForm" data-OpenedBy="" data-Validationcheck="Notdone">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Register New Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="ModalRegisterNewItemCode" class="control-label">Item Code</label>
+                        <input name="ModalRegisterNewItemCode" class="form-control" id="ModalRegisterNewItemCodeid" type="text"
+                               maxlength="100"
+                               value=""
+                               data-val="true"
+                               data-val-required="This field is required."
+                               data-val-maxlength-max="100"
+                               data-val-maxlength="The field must be a string or array type with a maximum length of '100'.">
+                        <span class="text-danger field-validation-valid"
+                              data-valmsg-replace="true"
+                              data-valmsg-for="ModalRegisterNewItemCode"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ModalRegisterNewItemName" class="control-label">Name</label>
+                        <input name="ModalRegisterNewItemName" class="form-control" id="ModalRegisterNewItemNameid" type="text"
+                               value=""
+                               data-val="true"
+                               data-val-required="This field is required." />
+                        <span class="text-danger field-validation-valid"
+                              data-valmsg-replace="true"
+                              data-valmsg-for="ModalRegisterNewItemName"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ModalRegisterNewItemBrand" class="control-label">Brand</label>
+                        <input name="ModalRegisterNewItemBrand" class="form-control" id="ModalRegisterNewItemBrandid" type="text"
+                               value=""
+                               data-val="true"
+                               data-val-required="This field is required." />
+                        <span class="text-danger field-validation-valid"
+                              data-valmsg-replace="true"
+                              data-valmsg-for="ModalRegisterNewItemBrand"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="ModalRegisterNewItemDescription" class="control-label">Description</label>
+                        <textarea name="ModalRegisterNewItemDescription"
+                                  class="form-control"
+                                  id="ModalRegisterNewItemDescriptionid"
+                                  value="">  
+                         </textarea>
+                        <span class="text-danger field-validation-valid"
+                              data-valmsg-replace="true"
+                              data-valmsg-for="ModalRegisterNewItemDescription"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="ModalRegisterNewItemPrice" class="control-label">Price</label>
+                        <input name="ModalRegisterNewItemPrice" class="form-control" id="ModalRegisterNewItemPriceid" type="text"
+                               value=""
+                               data-val="true"
+                               data-val-regex="Invalid price"
+                               data-val-regex-pattern="\d+(\.\d{1,2})?"
+                               data-val-required="This field is required." />
+                        <span class="text-danger field-validation-valid"
+                              data-valmsg-replace="true"
+                              data-valmsg-for="ModalRegisterNewItemPrice"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ModalRegisterNewItemTaxCode" class="control-label">Tax Code</label>
+                        <input name="ModalRegisterNewItemTaxCode" class="form-control" id="ModalRegisterNewItemTaxCodeid" type="text"
+                               value=""
+                               data-val="true"
+                               data-val-regex="Invalid Tax Code, must be of format 0.00 "
+                               data-val-regex-pattern="\d+(\.\d{1,2})?"
+                               data-val-required="This field is required." />
+                        <span class="text-danger field-validation-valid"
+                              data-valmsg-replace="true"
+                              data-valmsg-for="ModalRegisterNewItemTaxCode"></span>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="ModalRegisterNewItemSave()">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

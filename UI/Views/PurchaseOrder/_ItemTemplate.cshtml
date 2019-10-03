@@ -1,0 +1,92 @@
+﻿
+<div id="ItemTemplate" style="visibility:hidden">
+    <input id="TemplateTaxCode" hidden />
+    <input id="TemplateDBLineId" hidden />
+
+    <div class="row no-gutters">
+        <div class="col-12  col-md-11 no-gutters" style="background-color:darkcyan">
+            <div class="row col-12 no-gutters">
+                <div class="col-12 col-md-2">
+                    <div class="form-group form-group-overide">
+                        <label class="control-label control-label-overide" id="TemplateCodeLabel">Code</label>
+                        <input class="form-control" id="TemplateCodeInput" disabled />
+                    </div>
+                </div>
+                <div class="col-12 col-md-2">
+                    <div class="form-group form-group-overide">
+                        <label class="control-label control-label-overide" id="TemplateBrandLabel">Brand</label>
+                        <input class="form-control" disabled id="TemplateBrandInput" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="form-group form-group-overide">
+                        <label class="control-label control-label-overide" id="TemplateNameLabel">Name</label>
+                        <input class="form-control" disabled id="TemplateNameInput" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-2">
+                    <div class="form-group form-group-overide">
+                        <label class="control-label control-label-overide" id="TemplateQuantityLabel">Quantity</label>
+                        <input class="form-control" id="TemplateQuantityInput" onchange="TallyItems()"
+                               type="text"
+                               data-val-required="This field is required."
+                               data-val-regex-pattern="\d+(\.\d{1,2})?"
+                               data-val-regex="Invalid Quantity"
+                               data-val="true" />
+
+                        <span class="text-danger field-validation-valid"
+                              id="TemplateQuantitySpan"
+                              data-valmsg-replace="true"
+                              data-valmsg-for="TemplateQuantityInput"></span>
+                    </div>
+
+
+                </div>
+                <div class="col-12 col-md-2">
+                    <div class="form-group form-group-overide">
+                        <label class="control-label control-label-overide" id="TemplatePriceLabel">Price</label>
+                        <input class="form-control" id="TemplatePriceInput" onchange="TallyItems()"
+                               type="text"
+                               data-val-required="This field is required."
+                               data-val-regex-pattern="\d+(\.\d{1,2})?"
+                               data-val-regex="Invalid Price"
+                               data-val="true" />
+
+                        <span class="text-danger field-validation-valid"
+                              id="TemplatePriceSpan"
+                              data-valmsg-replace="true"
+                              data-valmsg-for="TemplatePriceInput"></span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row col-12 no-gutters">
+                <div class="col-12 col-md-8 no-gutters">
+                    <div class="form-group form-group-overide ">
+                        <label class="control-label control-label-overide " id="TemplateDescriptionLabel">Description</label>
+                        <input class="form-control" disabled id="TemplateDescriptionInput" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-2 no-gutters no-padding">
+                    <div class="form-group form-group-overide">
+                        <label class="control-label control-label-overide" id="TemplateTaxLabel">Tax</label>
+                        <input class="form-control" disabled id="TemplateTaxInput" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-2 no-gutters no-padding">
+                    <div class="form-group form-group-overide ">
+                        <label class="control-label control-label-overide" id="TemplateTotalLabel">Total</label>
+                        <input class="form-control" disabled id="TemplateTotalInput" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-1 ">
+            <button type="button" class="btn btn-block btn-primary" style="height:100%" id="TemplateButtonRemoveItem">Remove <br /> Item</button>
+        </div>
+    </div>
+    <br />
+
+</div>
+
+

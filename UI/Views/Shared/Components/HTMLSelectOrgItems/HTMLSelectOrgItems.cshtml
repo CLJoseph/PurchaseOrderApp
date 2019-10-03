@@ -1,0 +1,18 @@
+﻿
+@model UI.Views.Shared.Components.HTMLSelect.HTMLSelectOrgItemsViewComponent.OutputModel
+
+<div>
+    @if (!string.IsNullOrEmpty(Model.Label))
+    {
+        <label for="@Model.Name" class="control-label">@Model.Label</label>
+    }
+    <select name="@Model.Name"
+            id='@(Model.Name + "id" )'
+            class="form-control bg-info"
+            onchange="@Model.OnChangeEventHandler">
+        @foreach (var I in Model.Options)
+        {
+            <option value="@I.Value" selected="@I.Selected">@I.Text</option>
+        }
+    </select>
+</div>

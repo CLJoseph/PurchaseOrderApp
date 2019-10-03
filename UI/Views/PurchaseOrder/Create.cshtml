@@ -1,0 +1,155 @@
+﻿@model Models.ViewModels.PurchaseOrderViewModel
+<h1>Raise New Purchase order</h1>
+<hr />
+
+<form asp-action="Create" id="PurchaseOrderFormid" >
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div class="form-group">
+                <label asp-for="Code" class="control-label"></label>
+                <input asp-for="Code" class="form-control" disabled />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="form-group">
+                <label asp-for="DateRaised" class="control-label"></label>
+                <input asp-for="DateRaised" class="form-control" disabled />
+                <span asp-validation-for="DateRaised" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" disabled />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <vc:HTML-Select label="Budget Code"
+                                name="BudgetCodes"
+                                on-change-eventhandler=""
+                                selectedoption="Model.BudgetCode"
+                                options=Model.BudgetCodes>
+                </vc:HTML-Select>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <label asp-for="DateRequired" class="control-label"></label>
+                <input asp-for="DateRequired" class="form-control" />
+                <span asp-validation-for="DateRequired" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="Note" class="control-label"></label>
+                <textarea asp-for="Note" class="form-control" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div class="form-group">
+                <vc:HTML-Selectsubtext label="To"
+                                       name="To"
+                                       selectedoption="@Model.To"
+                                       options="Model.ToOptions"
+                                       on-change-event-handler=""></vc:HTML-Selectsubtext>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="form-group">
+                <vc:HTML-Selectsubtext label="Deliver To"
+                                       name="DeliverTo"
+                                       selectedoption="@Model.DeliverTo"
+                                       options="Model.DeliverToOptions"
+                                       on-change-event-handler="">
+                </vc:HTML-Selectsubtext>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="form-group">
+                <vc:HTML-Selectsubtext label="Invoice To"
+                                       name="InvoiceTo"
+                                       selectedoption="@Model.InvoiceTo"
+                                       options="Model.InvoiceToOptions"
+                                       on-change-event-handler="">
+                </vc:HTML-Selectsubtext>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12">
+            <vc:html-select-org-items label="Add Item to PO"
+                                      name="OrgItems"
+                                      on-change-eventhandler="ProcessSelection('OrgItems')"
+                                      options="@Model.HTMLSelectOrganisationItems"
+                                      selectedoption="">
+            </vc:html-select-org-items>
+        </div>
+    </div>
+
+    <br />
+
+    <div id="ItemsList">       
+    </div>
+
+
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-3">
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" id="Priceid" disabled />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-3">
+            <div class="form-group">
+                <label asp-for="Tax" class="control-label"></label>
+                <input asp-for="Tax" class="form-control" id="Taxid" disabled />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-3">
+            <div class="form-group">
+                <label asp-for="Total" class="control-label"></label>
+                <input asp-for="Total" class="form-control" id="Totalid" disabled />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-9"></div>
+        <div class="col-3">
+            <div class="form-group">
+                <button class="btn btn-block btn-primary" onclick="SavePOtoDatabase()" type="button"> Save to database</button>              
+            </div>
+        </div>
+    </div>   
+</form>
+
+
+
+<partial name="_ModalRegisterNewItem"/>
+<partial name="_ItemTemplate" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
