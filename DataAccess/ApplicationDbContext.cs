@@ -43,6 +43,9 @@ namespace DataAccess
             modelBuilder.Entity<ApplicationUser>().HasMany(M => M.PurchaseOrders).WithOne(x => x.ApplicationUser).IsRequired();
             modelBuilder.Entity<ApplicationUser>().HasMany(M => M.Organisations).WithOne(x => x.ApplicationUser).IsRequired();
             modelBuilder.Entity<ApplicationUser>(ConfigureApplicationUser);
+
+            modelBuilder.Entity<TblPurchaseOrderItem>().HasOne(i => i.PurchaseOrder).WithMany(c => c.Items).OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<TblPurchaseOrder>(ConfigurePurchaseOrders);
             modelBuilder.Entity<TblPurchaseOrderItem>(ConfigurePurchaseOrderItems);
             modelBuilder.Entity<TblOrganisation>(ConfigureOrganisations);
@@ -105,7 +108,6 @@ namespace DataAccess
             obj.Property(p => p.Tax).HasMaxLength(8);
             obj.Property(p => p.Total).HasMaxLength(15);
             obj.HasIndex(I => new {I.ApplicationUserId,I.Code}).IsUnique().HasName("IX_UniquePO").IsUnique();
-      
         }
         private void ConfigureApplicationUser(EntityTypeBuilder<ApplicationUser> obj)
         {

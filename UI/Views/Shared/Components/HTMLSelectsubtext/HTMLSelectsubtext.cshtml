@@ -14,7 +14,7 @@
             
         @foreach (var I in Model.Options)
         {
-            <option value="@I.Value" selected="@I.Selected" data-subtext="@I.SubText">@I.Text</option>
+            <option value="@I.Value" selected="@I.Selected" data-subtext="@I.SubText" data-email="@I.Email">@I.Text</option>
         }
         ></select>
     <span  id='@(Model.Name + "Span" )'  class="text-danger field-validation-valid"></span>

@@ -1,6 +1,9 @@
 ﻿//**************************************************************************************
 //  Handler for Purchase Order Views 
 //**************************************************************************************
+//  Global values
+//**************************************************************************************
+//**************************************************************************************
 // Page Events buttons pressed selects changed
 //**************************************************************************************
 function ProcessSelection(element) {
@@ -61,9 +64,7 @@ function SavePOtoDatabase() {
             // compose JSON object to submit to database.
             var POFormData = GetPOFormData(); 
             // now send to server to be saved in the database.
-            PostPOtoDatabase(POFormData);
-            // return to the Purchase order Index
-            //window.location.href = "index";
+            var result = PostPOtoDatabase(POFormData);         
         }
     } else {
         alert("Errors found please check");
@@ -354,9 +355,8 @@ function PostItemtoDatabase() {
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             if (xhr.responseText !== "Failure") {
-                AddOption("OrgItemsid", data.Name, xhr.responseText);
-                alert("Added Option :" + data.Name + xhr.responseText);
-               // AddItemToPO(data);
+                AddOption("OrgItemsid", data.Name, xhr.responseText);               
+                AddItemToPO(data);
                 $('#ModalRegisterNewItem').modal('hide');
             }
             return xhr.responseText;
@@ -526,6 +526,7 @@ function AddItemToPO(result) {
     TallyItems();
 }
 function GetPOFormData() {
+
     var ToReturn =
     {            
         //"RowVersionNo": document.getElementById("RowVersionNo").value,
@@ -536,14 +537,12 @@ function GetPOFormData() {
         "DateRequiredBy": document.getElementById("DateRequired").value,
         "Note": document.getElementById("Note").value,
         "To": document.getElementById("Toid").value,
+        "ToEmail": document.getElementById("Toid").selectedOptions[0].getAttribute("data-email"),
         "ToDetail": document.getElementById("ToDetailId").innerHTML,
-
         "DeliverTo": document.getElementById("DeliverToid").value,
         "DeliverToDetail": document.getElementById("DeliverToDetailId").innerHTML,
-
         "InvoiceTo": document.getElementById("InvoiceToid").value,
         "InvoiceToDetail": document.getElementById("InvoiceToDetailId").innerHTML,
-
         "Price": document.getElementById("Priceid").value,
         "Tax": document.getElementById("Taxid").value,
         "Total": document.getElementById("Totalid").value, 
@@ -591,9 +590,14 @@ function PostPOtoDatabase(PO) {
     xhr.responseType = "text";
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            alert("Server response is :" + xhr.responseText);
+        
             if (xhr.responseText !== "Failure") {
                 alert("Purchase Order Saved ");
+                //return "Purchase Order Saved";
+            } else
+            {
+                alert("Something happend, Save failed.");
+                //return "Something happend, Save failed.";
             }
         }
     };   

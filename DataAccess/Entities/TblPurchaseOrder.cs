@@ -16,6 +16,7 @@ namespace DataAccess.Entities
         public string DateRequired { get; set; }
         public string Note { get; set; }
         public string To { get; set; }
+        public string ToEmail { get; set; }
         public string ToDetail { get; set; }
         public string DeliverTo { get; set; }
         public string DeliverToDetail { get; set; }

@@ -46,7 +46,7 @@ namespace UI
         {
             UnitofWork _uofw = new UnitofWork(_context, _userManager.GetUserAsync(User).Result);  
             var result = _uofw.PurchaseOrders.GetAllPurchaseOrders();           
-            return View(PODTO.ToIndexModel(result,"Code","Ascending"));
+            return View(PODTO.ToIndexModel(result,"Code", "Descending"));
         }
 
         public IActionResult POIndex()
@@ -192,7 +192,7 @@ namespace UI
                 guidOutput = Guid.NewGuid();
             }
 
-            var ViewModel = PODTO.ToViewModel(
+            PurchaseOrderViewModel ViewModel = PODTO.ToViewModel(
                                                PO,
                                                _uofw.Lookups.GetLookuplist("BudgetCode"),
                                                _uofw.Organisations.GetOrganisations(),
@@ -320,10 +320,12 @@ namespace UI
             var result = JsonConvert.DeserializeObject<PurchaseOrderJsonModel>(PurchaseOrder.ToString());
             //// get PO from database 
             var PO = _uofw.PurchaseOrders.GetPurchaseOrderbyCode(result.Code);
+
             //// update it with the new details 
             PODTO.UpdatePO(PO, result);
             //// send to the database
-             _uofw.Complete();
+            _uofw.PurchaseOrders.Update(PO);
+            var res =  _uofw.Complete();
             // report result.
             return ToReturn;
         }
@@ -349,7 +351,7 @@ namespace UI
             Org.Name = Organisation;
             Org.ContactEmail = Email;
             Org.Contact = Contact;
-            Org.Address = line1 + "\n" + line2 + "\n" + line3 + "\n" + line4 + "\n" + line5 + "\n" + Code;
+            Org.Address = line1 + "<br />" + line2 + "<br />" + line3 + "<br />" + line4 + "<br />" + line5 + "<br />" + Code;
 
             _context.Organisations.Add(Org);
             try
@@ -365,14 +367,11 @@ namespace UI
         }
 
 
-
-
-
-
         [HttpGet, ActionName("EmailPO")]
         public async  Task<IActionResult> EmailAsync(Guid? id)
         {
-            var PO = _context.PurchaseOrders.Where(x => x.ID == id).Include(i => i.Items).Single();
+            var PO = _context.PurchaseOrders.Where(x => x.ID == id).Include(au => au.ApplicationUser).Include(i => i.Items).Single();
+            
             // convert the PO into view Model
             var ToView = PODTO.ToViewModel(PO, _userManager.GetUserAsync(User).Result);  
             var result = this.RenderViewAsync<PurchaseOrderViewModel>("Email", ToView, true);
@@ -383,11 +382,12 @@ namespace UI
 
             var apiKey = _appSecrets.SendGridKey;
             var client = new SendGridClient(apiKey);
-            var From = new EmailAddress("41tp41@gmail.com", "Me");
-            var To = new EmailAddress("cljoseph@yahoo.co.uk", "Me");
+            var From = new EmailAddress(PO.ApplicationUser.Email, PO.ApplicationUser.PersonName);
+            var To = new EmailAddress(ToView.ToEmail, ToView.To);
+            //var To = new EmailAddress("cljoseph@yahoo.co.uk", "Me");
 
-            var Subject = "test send from sendgrid";
-            var plainTextcontent = " this is a test message";
+            var Subject = "Purchase Order :" + ToView.Code;
+            var plainTextcontent = " this is a sample PO";
             var HtmlContent = result.Result;
             var msg = MailHelper.CreateSingleEmail(From, To, Subject, plainTextcontent, HtmlContent);
             var response = await client.SendEmailAsync(msg);

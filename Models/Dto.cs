@@ -159,7 +159,6 @@ namespace Models
 
             ToReturn.FromDetail = AU.PersonName + "<BR />" + AU.Email + "<BR />" + AU.Organisation; 
 
-
             ToReturn.Budget = Model.Budget;
             ToReturn.Code = Model.Code;
             ToReturn.DateFullfilled = Model.DateFullfilled;
@@ -176,6 +175,7 @@ namespace Models
             ToReturn.Status = Model.Status;
             ToReturn.Tax = Model.Tax;
             ToReturn.To = Model.To;
+            ToReturn.ToEmail = Model.ToEmail;
             ToReturn.ToDetail = Model.ToDetail;
             ToReturn.Total = Model.Total;
             if (Model.Items != null)
@@ -325,6 +325,7 @@ namespace Models
             PO.DeliverTo = FromView.DeliverTo;
             PO.InvoiceTo = FromView.InvoiceTo;
             PO.To = FromView.To;
+            PO.ToEmail = FromView.ToEmail;
             PO.ToDetail = FromView.ToDetail;
             PO.DeliverTo = FromView.DeliverTo;
             PO.DeliverToDetail = FromView.DeliverToDetail;
@@ -334,10 +335,7 @@ namespace Models
             PO.Price = FromView.Price;
             PO.Tax = FromView.Tax;
             PO.Total = FromView.Total;
-
             // remove items from PO if they have been removed from View
-
-
             List<TblPurchaseOrderItem> Toremove = new List<TblPurchaseOrderItem>(); 
 
             foreach (TblPurchaseOrderItem I in PO.Items)
@@ -345,18 +343,14 @@ namespace Models
                 var result = FromView.LineItem.Find(x => x.DBLineId == I.ID.ToString());
                 if (result == null)
                 {
+                    
                     Toremove.Add(I);
                 }
             }
-
             foreach (var I in Toremove)
             {
                 PO.Items.Remove(I);
             }
-            
-
-
-
             if (PO.Items == null)
             {
                 PO.Items = new List<TblPurchaseOrderItem>();
@@ -378,8 +372,7 @@ namespace Models
                 }
             }
             else
-            {
-                // now remove Items from the 
+            {           
                 foreach (var L in FromView.LineItem)
                 {
                     TblPurchaseOrderItem result = new TblPurchaseOrderItem();
@@ -391,9 +384,7 @@ namespace Models
                     catch
                     {
                         result = null;
-                    }
-
-                   
+                    }                   
                     if (result != null)
                     {
                         result.Brand = L.brand;

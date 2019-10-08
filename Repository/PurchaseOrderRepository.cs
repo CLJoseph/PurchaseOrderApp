@@ -18,7 +18,8 @@ namespace Repository
         TblPurchaseOrder GetPurchaseOrderbyId(Guid Id);
         TblPurchaseOrder GetPurchaseOrderbyIdIncludeItems(Guid Id);
         TblPurchaseOrder GetPurchaseOrderbyCode(string Code);
-        TblPurchaseOrder RaisePurchaseOrder(); 
+        TblPurchaseOrder RaisePurchaseOrder();
+        void Update(TblPurchaseOrder PO);
     }
 
     public class PurchaseOrderRepository : Repository<TblPurchaseOrder>, IPurchaseOrderRepository
@@ -183,6 +184,15 @@ namespace Repository
                 ToReturn = null;
             }
             return ToReturn;
-        }       
+        }
+        public void Update(TblPurchaseOrder PO)
+        {
+            _Dbcontext.Update<TblPurchaseOrder>(PO);
+            _DbContext.Entry(PO).State = EntityState.Modified;
+        }
+
+
+
+
     }
 }

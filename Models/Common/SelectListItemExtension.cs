@@ -11,5 +11,6 @@ namespace Models.Common
     public class SelectListItemExtension: SelectListItem
     {
         public string SubText { get; set; }
+        public string Email { get; set; }
     }
 }

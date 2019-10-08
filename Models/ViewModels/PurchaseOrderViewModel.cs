@@ -26,6 +26,7 @@ namespace Models.ViewModels
         public string Note { get; set; }
         public string FromDetail { get; set; }
         public string To { get; set; }
+        public string ToEmail { get; set; }
         public string ToDetail { get; set; }
         public List<OrgDetail> ToOptions { get; set; }
         public string DeliverTo { get; set; }

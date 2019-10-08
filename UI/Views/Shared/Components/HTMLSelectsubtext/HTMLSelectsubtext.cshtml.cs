@@ -22,6 +22,7 @@ namespace UI.Views.Shared.Components.HTMLSelect
             public string Value { get; set; }
             public string Text { get; set; }
             public string subtext { get; set; }
+            public string email { get; set; }
             public string OnChangeEventHandler { get; set; }
 
             public List<SelectListItemExtension> Options = new List<SelectListItemExtension>();
@@ -41,7 +42,8 @@ namespace UI.Views.Shared.Components.HTMLSelect
                                 Text = Opt.Name,
                                 Value = Opt.Id,
                                 Selected = true,
-                                SubText = Opt.info
+                                SubText = Opt.info,
+                                Email = Opt.Email
                             });
                             subtext = Opt.info;
                         }
@@ -52,7 +54,9 @@ namespace UI.Views.Shared.Components.HTMLSelect
                                 Text = Opt.Name,
                                 Value = Opt.Id,
                                 Selected = false,
-                                SubText = Opt.info
+                                SubText = Opt.info,
+                                Email = Opt.Email
+
                             });
                         }
                     }
@@ -66,13 +70,15 @@ namespace UI.Views.Shared.Components.HTMLSelect
                         {
                             OptSet = true;
                             subtext = opt.info;
+                            email = opt.Email;
                         }
                         Options.Add(new SelectListItemExtension()
                         {
                         Text = opt.Name,
                         Value = opt.Id,
                         Selected = OptSet,
-                        SubText = opt.info
+                        SubText = opt.info,
+                        Email = opt.Email
                         });
                     }
                 }
@@ -98,6 +104,7 @@ namespace UI.Views.Shared.Components.HTMLSelect
                 _model.Value = options[0].Id;
                 _model.Text = options[0].Name;
                 _model.subtext = options[0].info;
+                _model.email = options[0].Email;
             }
 
             return View("HtmlSelectsubtext", _model);

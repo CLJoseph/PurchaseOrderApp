@@ -17,5 +17,6 @@ namespace DataAccess.Entities
         public string Quantity { get; set; }
         public string Tax { get; set; }
         public string Total { get; set; }
+        public TblPurchaseOrder PurchaseOrder { get; set; }
     }
 }

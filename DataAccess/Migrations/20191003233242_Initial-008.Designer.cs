@@ -4,14 +4,16 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191003233242_Initial-008")]
+    partial class Initial008
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,8 +281,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("Price")
                         .HasMaxLength(15);
 
-                    b.Property<Guid?>("PurchaseOrderID");
-
                     b.Property<string>("Quantity");
 
                     b.Property<byte[]>("RowVersionNo")
@@ -292,12 +292,14 @@ namespace DataAccess.Migrations
 
                     b.Property<string>("TaxCode");
 
+                    b.Property<Guid?>("TblPurchaseOrderID");
+
                     b.Property<string>("Total")
                         .HasMaxLength(15);
 
                     b.HasKey("ID");
 
-                    b.HasIndex("PurchaseOrderID");
+                    b.HasIndex("TblPurchaseOrderID");
 
                     b.ToTable("PurchaseOrderItems");
                 });
@@ -411,10 +413,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.TblPurchaseOrderItem", b =>
                 {
-                    b.HasOne("DataAccess.Entities.TblPurchaseOrder", "PurchaseOrder")
+                    b.HasOne("DataAccess.Entities.TblPurchaseOrder")
                         .WithMany("Items")
-                        .HasForeignKey("PurchaseOrderID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TblPurchaseOrderID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

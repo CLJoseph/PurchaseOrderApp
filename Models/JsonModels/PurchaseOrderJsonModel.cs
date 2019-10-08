@@ -36,6 +36,7 @@ namespace Models.JsonModels
         public string Total { get; set; }
         public string BudgetCode { get; set; }
         public string To { get; set; }
+        public string ToEmail { get; set; }
         public string DeliverTo { get; set; }
         public string InvoiceTo { get; set; }
         public string ToDetail { get; set; }
