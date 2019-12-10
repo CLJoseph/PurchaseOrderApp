@@ -11,14 +11,11 @@ namespace Models.ViewModels
     {
         // hidden 
         public string ApplicationUserId { get; set; }
-        public string Id { get; set; }
-   
+        public string Id { get; set; }   
         public string Code { get; set; }
         public string Status { get; set; }
         public List<string> NewStatus = new List<string>(); 
-
-        public string Budget { get; set; }
-     
+        public string Budget { get; set; }     
         public string DateRaised { get; set; }
         public string DateFullfilled { get; set; }
         public string DateRequired { get; set; }
@@ -30,7 +27,5 @@ namespace Models.ViewModels
         public string Price { get; set; }
         public string Tax { get; set; }
         public string Total { get; set; }
-
-              
     }
 }

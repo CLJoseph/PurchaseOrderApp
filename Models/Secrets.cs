@@ -6,8 +6,11 @@ namespace Models
 {
     public class Secrets
     {
+
       public string Test { get; set; }
       public string SendGridUser { get; set; }
       public string SendGridKey { get; set; }
+      public string Enviroment { get; set; }
+        public string DBconnection { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model Models.ViewModels.PurchaseOrderItemViewModel
 
 
-<div id="@("Item_"+ Model.Id)" style="background-color:burlywood" class="PurchaseOrderItem">
+<div id="@("Item_"+ Model.Id)" style="background-color:darkgray" class="PurchaseOrderItem">
     <input id="@("Item_" + Model.Id + "TaxCodeId")" value="@Model.TaxCode" hidden/>
     <input id="@("Item_" + Model.Id + "DBLineId")"  value="@Model.Id" hidden />
 

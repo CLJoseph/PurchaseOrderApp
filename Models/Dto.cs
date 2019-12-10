@@ -10,6 +10,7 @@ using Models.JsonModels;
 using Models.ViewModels;
 
 namespace Models
+
 {
     // methods to do the data transfer from one model to another
     public class PurchaseOrderDTO
@@ -61,7 +62,8 @@ namespace Models
             PurchaseOrderViewModel ToReturn = new PurchaseOrderViewModel();
             ToReturn.ApplicationUserId = Model.ApplicationUser.Id.ToString();
             ToReturn.Budget = Model.Budget;
-            ToReturn.BudgetCodes = BudgetCodes;
+            ToReturn.BudgetCodes = BudgetCodes;  
+
             ToReturn.Code = Model.Code;
             ToReturn.DateFullfilled = Model.DateFullfilled;
             ToReturn.DateRaised = Model.DateRaised;
@@ -79,6 +81,8 @@ namespace Models
             ToReturn.Status = Model.Status;
             ToReturn.Tax = Model.Tax;
             ToReturn.To = Model.To;
+            ToReturn.ToEmail = Model.ToEmail;
+            ToReturn.ToPerson = Model.ToPerson;
             ToReturn.ToDetail = Model.ToDetail;
             ToReturn.ToOptions = Organisations;
             ToReturn.Total = Model.Total;
@@ -94,7 +98,6 @@ namespace Models
                 Value = "NewItem",
                 Selected = true
             });
-
             if (OrgItems != null)
             {
                 foreach (var I in OrgItems.Items)
@@ -108,20 +111,7 @@ namespace Models
 
                 }
             }
-
-
-
-            //if (OrgItems != null)
-            //{ 
-            //    foreach (var I in OrgItems.Items)
-            //    {
-            //        ToReturn.HTMLSelectOrganisationItems.Add(new SelectOrgItem()
-            //        {
-            //             Text = I.Name,
-            //             Value = I.ID.ToString()
-            //        });
-            //    }
-            //}   
+          
             if (Model.Items != null)
             {
 
@@ -176,6 +166,7 @@ namespace Models
             ToReturn.Tax = Model.Tax;
             ToReturn.To = Model.To;
             ToReturn.ToEmail = Model.ToEmail;
+            ToReturn.ToPerson = Model.ToPerson;
             ToReturn.ToDetail = Model.ToDetail;
             ToReturn.Total = Model.Total;
             if (Model.Items != null)
@@ -326,6 +317,7 @@ namespace Models
             PO.InvoiceTo = FromView.InvoiceTo;
             PO.To = FromView.To;
             PO.ToEmail = FromView.ToEmail;
+            PO.ToPerson = FromView.ToPerson;
             PO.ToDetail = FromView.ToDetail;
             PO.DeliverTo = FromView.DeliverTo;
             PO.DeliverToDetail = FromView.DeliverToDetail;
@@ -417,17 +409,18 @@ namespace Models
             return PO;
         }
     }
-
-
     public class OrganisationsDTO
     {
+        private string[] lines;
+
         public TblOrganisation ToTableModel(OrganisationViewModel Model)
         {
             TblOrganisation ToReturn = new TblOrganisation();
             ToReturn.ID = Guid.Parse(Model.Id);         
             ToReturn.ApplicationUserId = Guid.Parse(Model.ApplicationUserId);
             ToReturn.Name = Model.Name;
-            ToReturn.Address = Model.Address;
+           // ToReturn.Address = Model.Address;
+            ToReturn.Address = Model.Line01 + "<br />" + Model.Line02 + "<br />" + Model.Line03 + "<br />" + Model.Line04 + "<br />" + Model.Line05 + "<br />" + Model.Code;
             ToReturn.Contact = Model.Contact;
             ToReturn.ContactEmail = Model.ContactEmail;
             ToReturn.ContactNo = Model.ContactNo;            
@@ -437,7 +430,10 @@ namespace Models
         public void ToTableModel(TblOrganisation ToReturn,  OrganisationViewModel Model)
         {
             ToReturn.Name = Model.Name;
-            ToReturn.Address = Model.Address;
+            //ToReturn.Address = Model.Address;
+
+            ToReturn.Address =  Model.Line01 + "<br />" + Model.Line02 + "<br />" + Model.Line03 + "<br />" + Model.Line04 + "<br />" + Model.Line05 + "<br />" + Model.Code;
+
             ToReturn.Contact = Model.Contact;
             ToReturn.ContactEmail = Model.ContactEmail;
             ToReturn.ContactNo = Model.ContactNo;
@@ -462,6 +458,16 @@ namespace Models
         public OrganisationViewModel ToViewModel(TblOrganisation Model)
         {
             OrganisationViewModel ToReturn = new OrganisationViewModel();
+            lines = Model.Address.Split("<br />");
+
+            ToReturn.Line01 = lines[0];
+            ToReturn.Line02 = lines[1];
+            ToReturn.Line03 = lines[2];
+            ToReturn.Line04 = lines[3];
+            ToReturn.Line05 = lines[4];
+            ToReturn.Code = lines[5];
+
+
             ToReturn.Address = Model.Address;
             ToReturn.Contact = Model.Contact;
             ToReturn.ContactEmail = Model.ContactEmail;
@@ -476,6 +482,7 @@ namespace Models
         {
             TblOrganisationItem ToReturn = new TblOrganisationItem();
             ToReturn.ID = Guid.Parse(Model.Id);
+            ToReturn.TblOrganisationId = Guid.Parse(Model.OrganisationId);
             ToReturn.Name = Model.Name;
             ToReturn.Brand = Model.Brand;
             ToReturn.Code = Model.Code;

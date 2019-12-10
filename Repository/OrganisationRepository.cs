@@ -53,23 +53,27 @@ namespace Repository
             {
                 Id= "Select",
                 Name = "Select Organisation",
-                info = "",
-                Email = ""
+                Info = "",
+                Email = "",
+                Person = ""
+                 
             });
             ToReturn.Add(new OrgDetail()
             {
                 Id = "NewOrganisation",
                 Name = "New Organisation",
-                info = "",
-                Email = ""
+                Info = "",
+                Email = "",
+                Person = ""
             });
             foreach (var O in result)            {
                 ToReturn.Add(new OrgDetail()
                 {
                     Id = O.ID.ToString(),
                     Name = O.Name,
-                    info = O.Name + "<br /> " + O.Contact + "<br /> " + O.ContactNo + "<br /> " + O.ContactEmail + "<br />" + O.Address,
-                    Email = O.ContactEmail
+                    Info = O.Name + "<br /> " + O.Contact + "<br /> " + O.ContactNo + "<br /> " + O.ContactEmail + "<br />" + O.Address,
+                    Email = O.ContactEmail,
+                    Person = O.Contact
                 });
             }
             return ToReturn;

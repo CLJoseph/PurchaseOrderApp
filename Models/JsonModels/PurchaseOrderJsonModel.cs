@@ -19,7 +19,6 @@ namespace Models.JsonModels
         public string tax { get; set; }
         public string total { get; set; }
     }
-
     public class PurchaseOrderJsonModel
     {
         public string PurchaseOrderid { get; set; }
@@ -37,6 +36,7 @@ namespace Models.JsonModels
         public string BudgetCode { get; set; }
         public string To { get; set; }
         public string ToEmail { get; set; }
+        public string ToPerson { get; set; }
         public string DeliverTo { get; set; }
         public string InvoiceTo { get; set; }
         public string ToDetail { get; set; }

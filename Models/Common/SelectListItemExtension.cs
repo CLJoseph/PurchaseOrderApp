@@ -12,5 +12,6 @@ namespace Models.Common
     {
         public string SubText { get; set; }
         public string Email { get; set; }
+        public string Person { get; set; }
     }
 }

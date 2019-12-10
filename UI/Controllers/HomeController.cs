@@ -4,14 +4,27 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using UI.Models;
 
 namespace UI.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController(Secrets S)
+        {
+            _Test = S;
+        }
+
+
+        Secrets _Test;
+
         public IActionResult Index()
         {
+
+
+            ViewData["Env"] = _Test.Enviroment;
+            ViewData["Con"] = _Test.DBconnection;
             return View();
         }
 
@@ -21,6 +34,12 @@ namespace UI.Controllers
         }
 
         public IActionResult About()
+        {
+            return View();
+        }
+
+
+        public IActionResult Instructions()
         {
             return View();
         }

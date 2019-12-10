@@ -21,8 +21,10 @@ namespace UI.Views.Shared.Components.HTMLSelect
             public string Label { get; set; }
             public string Value { get; set; }
             public string Text { get; set; }
-            public string subtext { get; set; }
-            public string email { get; set; }
+            public string Subtext { get; set; }
+            public string Email { get; set; }
+            public string Person { get; set; }
+
             public string OnChangeEventHandler { get; set; }
 
             public List<SelectListItemExtension> Options = new List<SelectListItemExtension>();
@@ -42,10 +44,12 @@ namespace UI.Views.Shared.Components.HTMLSelect
                                 Text = Opt.Name,
                                 Value = Opt.Id,
                                 Selected = true,
-                                SubText = Opt.info,
-                                Email = Opt.Email
+                                SubText = Opt.Info,
+                                Email = Opt.Email,
+                                Person = Opt.Person
+                                
                             });
-                            subtext = Opt.info;
+                            Subtext = Opt.Info;
                         }
                         else
                         {
@@ -54,9 +58,9 @@ namespace UI.Views.Shared.Components.HTMLSelect
                                 Text = Opt.Name,
                                 Value = Opt.Id,
                                 Selected = false,
-                                SubText = Opt.info,
-                                Email = Opt.Email
-
+                                SubText = Opt.Info,
+                                Email = Opt.Email,
+                                Person = Opt.Person
                             });
                         }
                     }
@@ -69,17 +73,19 @@ namespace UI.Views.Shared.Components.HTMLSelect
                         if (opt.Id == selected)
                         {
                             OptSet = true;
-                            subtext = opt.info;
-                            email = opt.Email;
+                            Subtext = opt.Info;
+                            Email = opt.Email;
+                            Person = opt.Person; 
                         }
                         Options.Add(new SelectListItemExtension()
                         {
                         Text = opt.Name,
                         Value = opt.Id,
                         Selected = OptSet,
-                        SubText = opt.info,
-                        Email = opt.Email
-                        });
+                        SubText = opt.Info,
+                        Email = opt.Email,
+                        Person = opt.Person
+                    });
                     }
                 }
             }
@@ -103,8 +109,9 @@ namespace UI.Views.Shared.Components.HTMLSelect
                 // take 1st in list 
                 _model.Value = options[0].Id;
                 _model.Text = options[0].Name;
-                _model.subtext = options[0].info;
-                _model.email = options[0].Email;
+                _model.Subtext = options[0].Info;
+                _model.Email = options[0].Email;
+                _model.Person = options[0].Person;
             }
 
             return View("HtmlSelectsubtext", _model);

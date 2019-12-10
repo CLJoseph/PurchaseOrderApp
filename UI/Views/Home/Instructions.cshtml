@@ -1,0 +1,246 @@
+﻿
+
+
+    <div class="row">
+        <div class="col-sm-3 col-md-3 menubackground">
+            <div class="instruction-content-menu" style="height:100%">
+                <div class="StickyMenu">
+                    <ul>
+                        <li> <a href="#Instruction-about">About</a></li>
+                        <li> <a href="#Instruction-top">Instructions</a></li>
+                        <li> <a href="#Instruction-CreateAccount">Create an Account</a></li>
+                        <li> <a href="#Instruction-CreatePO">Create a Purchase order</a></li>
+                        <li> <a href="#Instruction-ViewEditPO">View\edit a Purchase order</a></li>
+                        <li> <a href="#Instruction-Organisation">Organisation</a></li>
+                        <li> <a href="#Instruction-OrganisationRegister">Register a new Organisation</a></li>
+                        <li> <a href="#Instruction-OrganisationEdit">Edit Organisation</a> </li>
+                        <li> <a href="#Instruction-OrganisationItems">Organisation Items </a></li>
+                        <li> <a href="#Instruction-OrganisationItemsRegister">Organisation Items </a></li>
+                        <li> <a href="#Instruction-OrganisationItemsRegisterPOForm">Register Item via PO form </a></li>
+                        <li> <a href="#Instruction-OrganisationItemsRegisterMainMenu">Register Item via Main Menu</a></li>
+                        <li> <a href="#Instruction-OrganisationItemsEdit">Edit Item</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-9 col-md-9 ">
+            <div class="instruction-content">
+                <a name="Instruction-about"></a>
+                <h4> About</h4>
+                <p>
+                    The aim of the app is to provide a quick simple and efficient way of generating PO’s.
+                    Using this application, a user can generate a Purchase order and email that order to a recipient.
+                    All PO’s generated stored in a database for future reference.
+                    <br /><br />
+                    The app has been constructed to work across a range of devices Mob, tablets,
+                    laptop and desktop computers able to run modern browsers.
+                    If the device has a live connection to the internet whatever the location a PO can be created and sent.
+                    <br />
+                    This app currently sits on the Microsoft Azure platform.
+                    <br /> <br />
+                    To start generating PO’s a user needs a valid email address and register an account.
+                </p>
+
+                <a name="Instruction-top"></a>
+                <h2>Instructions</h2>
+                <a name="Instruction-CreateAccount"></a>
+                <h4>Create an account</h4>
+                <p>
+                    Create an account
+                    On the menu bar, top right click on register. The form below will appear
+                </p>
+                <div class="ImageContainer">
+                    <img class="Image" src="~/Images/Register.JPG" />
+                </div>
+                <p>
+                    Enter your details and click on Register. <br />
+
+                    A confirmation email will be sent out asking you to confirm your account.  Please allow a short period of time
+                    Then check your email, Open the email and click on the confirmation request. That will open the web site in a
+                    browser and activate your account.  You can now login and begin creating PO’s.
+                    <br />
+
+                </p>
+                <a name="Instruction-CreatePO"></a>
+                <h4>  Create a Purchase Order </h4>
+                <p></p>
+                <p>
+                    On the menu bar click on Purchase Order.  If you have not logged on the logon screen will appear,
+                    enter your logon details and the following screen will appear. It will display a list of
+                    the previously created PO's if there are any.  <br />
+                    The display will adapt to the screen of the device you are using. The image below is taken from a browser
+                    on a laptop. <br />
+                    Note the text in blue indicates action links. Which if you click on or touch activates a process. eg
+                    to sort a column press or click on "(---)" the column will be sorted andsort order displayed. Or if a PO number the PO will be displayed.
+                <p />
+                <div class="ImageContainer">
+                    <img class="Image" src="~/Images/PurchaseOrder.JPG" />
+                </div>
+                <p>
+                    Press Purchase Order then on the following screen press Create New Purchase order.  This
+                    will present you with an empty Purchase Order form.
+                </p>
+                <div class="ImageContainer"> <img class="Image" src="~/Images/RaiseNewPO.JPG" /></div>
+                <p>
+                    The app will generate a code for the PO displayed in the Code field.
+                    The date and time the PO was created displayed in the Date Raised field and status of the PO in the Status field.
+                    A status of open means the PO is open for modifications.
+
+                    The form consists of information fields you can edit and dropdown lists.
+                    To add an item to a dropdown list, click on the dropdown
+                    select “New  ******” a form will appear where you can enter the new option.
+                    That option will be stored in the database and be available for future use.
+                    <br /> <br />
+                    The fields you need to enter are : <br /><br />
+                    Budget Code (A dropdown): select from list or enter new code. <br /><br />
+
+                    Date Required : Information field informing the recipient when you want\need the Items<br /><br />
+                    Note : Additional  information  you feel necessary to add to the PO.<br /><br />
+
+                    To (A dropdown) :  the organisation you want to send the PO to.  This will contain the email the PO will be sent to. <br /><br />
+                    Pick from the list or enter a new organisation.<br /><br />
+                    DeliverTo (A dropdown) :  the place you want the Items delivered.<br /><br />
+                    InvoiceTo(A dropdown) :  the place the suppliers invoice is to be sent to.<br /><br />
+                    Add Item to the PO. (A dropdown):  to add an Item to the PO Pick one from the dropdown or
+                    select “New Item”. <br />If you select an Item it will appear on the PO where you can Change the quantity and price.  If you select new Item, you will be presented with a form where you can enter the item details. These will be stored in the database for future use and added to the
+                    Current PO.
+                    <br /><br />
+                    Press save to Database to save the PO to the database.  It will be stored in the database and be available for modification until emailed to the recipient.
+                    On emailing the Status of the PO will be sent.
+                </p>
+                <a name="Instruction-ViewEditPO"></a>
+                <h4>  View \ Edit a Purchase Order </h4>
+                <p>
+                    On the menu bar click on Purchase Order. On the list of PO's click on the  PO Code you want to Edit \ View.
+                    <br />
+                    A status of "Open" the PO can be modified, "Sent" it can only be viewed.
+                    <br>
+                    The From displayed is the same as "Register a New PO" except the title is now "Edit Purchase Order" and some field have data from the previous
+                    session.
+                </p>
+                <a name="Instruction-Organisation"></a>
+                <h4> Organisation </h4>
+                <p>
+                    In the app an Organisation is the Name, Contact details (name and email) and address of an organisation. The email being esential
+                    as the app will use that as the destination for the Purchase order.
+                </p>
+                <a name="Instruction-OrganisationRegister"></a>
+                <h4> Register a new Organisation </h4>
+
+                <p>
+                    There are 2 ways to register a Organisation. <br />
+                    1. on a PO form select new Organisation from a "To","Deliver to","Invoice to" drop drom list.
+                    A pop up form shown below will appear into which you can enter the details. Press Save the organisation will be registered and
+                    added to the dropdowns.
+                <p />
+
+                <div class="ImageContainer">
+                    <img  class="Image" src="~/Images/OrganisationRegisterForm1.JPG" />
+                </div>
+                <p>
+                    2. Select Organisations on the main menu then Create new. The form shown below will appear.
+                <p />
+                <div class="ImageContainer">
+                    <img class="Image" src="~/Images/OrganisationRegisterForm2.JPG" />
+                </div>
+                <p>
+                    Fill in the form and press save, the organisation will be registered on the system.
+                </p>
+
+
+                <a name="Instruction-OrganisationEdit"></a>
+                <h4> Organisation Edit </h4>
+                <p>
+                    To modify organisation details, click on the organisation on the main menu the form below will appear, Click on the name of the organisation you want to modify
+                </p>
+                <div class="ImageContainer">   <img class="Image" src="~/Images/OrganisationList.JPG" /> </div>
+                <p>
+                    The form below will appear containing details of the orgainisation which you can now modify.
+                </p>
+
+                <div class="ImageContainer">
+                    <img class="Image" src="~/Images/OrganisationEditForm.JPG" />
+                    <div />
+
+                    <p>Press the save button to register the changes </p>
+
+                    <a name="Instruction-OrganisationItems"></a>
+                    <h4> Organisation Items </h4>
+                    <p>
+                        An Organisation item is a description of product or service provided by that organisation
+                        which you can put on a purchase order.
+
+                        In the app as with Organisations there are 2 ways to register an organisation Item. <br />
+                        Through the PO form,  or from the main menu.
+
+                    </p>
+
+                    <div class="ImageContainer">
+                        <img class="Image" src="~/Images/OrganisationItems.JPG" />
+                    </div>
+
+                    <a name="Instruction-OrganisationItemsRegisterPOForm"></a>
+                    <h4> Organisation Item Register (PO Form)  </h4>
+                    <p>
+                        Register an item through the PO form. Open up a PO form click on "Select Item" on the "Add Item to PO" drop down
+                    </p>
+                    <div class="ImageContainer">
+                        <img class="Image" src="~/Images/POselectItemdropdown.JPG" />
+                    </div>
+                    <p>
+                        Select "New Item" from the list and the form shown below will appear.
+                    </p>
+
+                    <div class="ImageContainer">
+                        <img class="Image" src="~/Images/POnewItemForm.JPG" />
+                    </div>
+
+                    <p>
+                        Enter the Item details and Press Save to register the item and display it on the Form.
+
+                    </p>
+
+
+                    <a name="Instruction-OrganisationItemsRegisterMainMenu"></a>
+                    <h4> Organisation Item Register (Main menu)  </h4>
+                    <p>
+                        Click on "Organisations" on the Main menu then "List Items" on the Organisation whose Items you want to view.
+                    </p>
+                    <div class="ImageContainer">
+                        <img class="Image" src="~/Images/OrganisationItems1.JPG" />
+                    </div>
+                    <p>
+                        Select "Create New" from the list and the form shown below will appear.
+                    </p>
+
+                    <div class="ImageContainer">
+                        <img class="Image" src="~/Images/MainMenunewItemForm.JPG" />
+                    </div>
+
+                    <p>
+                        Enter the Item details and Press Save to register the item.
+                    </p>
+
+
+
+                    <a name="Instruction-OrganisationItemsEdit"></a>
+
+                    <h4> Organisation Edit Item </h4>
+                    <p>
+                        Select "Organisations" on the main menu, "List Items" to view the list of Items registered to the organisation.
+                        Click on the name of the item whose details you want to modify, the form below will be shown. Make your changes and press Save
+                        to keep them in the app.
+
+
+                    </p>
+
+                    <div class="ImageContainer">
+                        <img class="Image" src="~/Images/OrganisationItemEdit.JPG" />
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>

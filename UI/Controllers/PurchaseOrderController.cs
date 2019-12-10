@@ -53,6 +53,7 @@ namespace UI
         {
             UnitofWork _uofw = new UnitofWork(_context, _userManager.GetUserAsync(User).Result);
             var result = _uofw.PurchaseOrders.GetAllPurchaseOrders();
+            _uofw.Dispose();
             return View("Index",PODTO.ToIndexModel(result, "Code", "Ascending"));
         }
 
@@ -62,6 +63,7 @@ namespace UI
            
             UnitofWork _uofw = new UnitofWork(_context, _userManager.GetUserAsync(User).Result);
             var result = _uofw.PurchaseOrders.GetAllPurchaseOrders(OrderBy, Order);
+            _uofw.Dispose();
             return View("Index",PODTO.ToIndexModel(result,OrderBy,Order));
         }
         // GET: PurchaseOrder/Details/5
@@ -93,8 +95,6 @@ namespace UI
             }
             return View("Details",PODTO.ToViewModel(result));
         }
-
-
         // GET: PurchaseOrder/Details/5
         [HttpGet, ActionName("Status")]
         public async Task<IActionResult> Status(Guid? id)
@@ -134,8 +134,6 @@ namespace UI
             }
             return View(PODTO.ToViewModel(result,StatusList));
         }
-
-
         [HttpPost, ActionName("Status")]
         public async Task<IActionResult> NewStatus([Bind("Id,RowVersionNo")] string Id, string NewStatus)
         {
@@ -244,7 +242,6 @@ namespace UI
             return View(tblPurchaseOrder);
         }
 
-
         private bool TblPurchaseOrderExists(Guid id)
         {
             return _context.PurchaseOrders.Any(e => e.ID == id);
@@ -310,7 +307,6 @@ namespace UI
             return OpperationStatus;
         }
 
-
         [HttpPost, ActionName("SavePO")]
         //public string SavePO([FromQuery]string PurchaseOrder)
         public string SavePO([FromBody]JObject PurchaseOrder)
@@ -366,7 +362,6 @@ namespace UI
             return OpperationStatus;
         }
 
-
         [HttpGet, ActionName("EmailPO")]
         public async  Task<IActionResult> EmailAsync(Guid? id)
         {
@@ -376,32 +371,45 @@ namespace UI
             var ToView = PODTO.ToViewModel(PO, _userManager.GetUserAsync(User).Result);  
             var result = this.RenderViewAsync<PurchaseOrderViewModel>("Email", ToView, true);
 
-            StreamWriter sw = new StreamWriter("C:\\Users\\Carl\\Source\\Repos\\test.html");
-            sw.Write(result.Result);
-            sw.Close();
+            //StreamWriter sw = new StreamWriter("C:\\Users\\Carl\\Source\\Repos\\test.html");
+            //sw.Write(result.Result);
+            //sw.Close();
 
             var apiKey = _appSecrets.SendGridKey;
             var client = new SendGridClient(apiKey);
-            var From = new EmailAddress(PO.ApplicationUser.Email, PO.ApplicationUser.PersonName);
-            var To = new EmailAddress(ToView.ToEmail, ToView.To);
+            var From = new EmailAddress("NoReply@example.com", " PO generator");
+            var Replyto = new EmailAddress(PO.ApplicationUser.Email, PO.ApplicationUser.PersonName);
+            var To = new EmailAddress(ToView.ToEmail, ToView.ToPerson);
             //var To = new EmailAddress("cljoseph@yahoo.co.uk", "Me");
 
             var Subject = "Purchase Order :" + ToView.Code;
             var plainTextcontent = " this is a sample PO";
             var HtmlContent = result.Result;
             var msg = MailHelper.CreateSingleEmail(From, To, Subject, plainTextcontent, HtmlContent);
+            msg.ReplyTo = Replyto;
+
             var response = await client.SendEmailAsync(msg);
-
-
             // set the status as beeing sent
             PO.Status = "Sent";
             _context.SaveChanges();
-
             return RedirectToAction("Index");
         }
 
 
-
+        [HttpGet, ActionName("RegisterBudgetCode")]
+        public string RegisterBudgetCode(string BudgetCode) 
+        {
+            var u =  _userManager.GetUserAsync(User).Result;
+            TblLookup newLookup = new TblLookup()
+            {
+                Lookup = u.Id + "_BudgetCode",
+                Note = "",
+                Value = BudgetCode
+            };
+            _context.Lookups.Add(newLookup);
+            _context.SaveChanges();
+            return BudgetCode;
+        }
     }
 }
 

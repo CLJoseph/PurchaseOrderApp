@@ -7,6 +7,14 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Azure.KeyVault;
+using Microsoft.Azure.KeyVault.Models;
+using Microsoft.Azure.Services.AppAuthentication;
+using DataAccess;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
+
 
 namespace UI
 {
@@ -14,11 +22,27 @@ namespace UI
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+
+            //using (var context = new ApplicationDbContext()) {
+            //    context.Database.Migrate();
+            //}
+
+            try
+            {
+                CreateWebHostBuilder(args).Build().MigrateDatabase().Run();
+
+            }
+            catch (Exception Ex)
+            {
+                Console.WriteLine("Error : " + Ex.Message);
+            }
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+
     }
+
+       
 }

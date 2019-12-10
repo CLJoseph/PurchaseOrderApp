@@ -6,157 +6,158 @@
 
 
 
-<p> 
-    <a asp-action="Create">Create New Purchase Order</a>
-</p>
+<div class="displaybox">
+    <div class="row">
+        <div class="col-sm-12 col-md-3"><h3>Purchase Orders</h3> </div>
+        <div class="col-sm-12 col-md-5">
+            <a class="btn btn-block btn-primary Buton-Green" asp-action="Create">Create New</a>
+        </div>
+    </div>
+</div>
+<div class="displaybox">
+    <div class="row">
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.Index[0].Code)
+            @if (Model.OrderBy == "Code")
+            {
+                switch (@Model.Order)
+                {
+                    case "Ascending":
+                        <a asp-controller="PurchaseOrder"
+                           asp-action="IndexSorted"
+                           asp-route-OrderBy="Code"
+                           asp-route-Order="Ascending">(Asc)</a>
+
+                        break;
+                    case "Descending":
+                        <a asp-controller="PurchaseOrder"
+                           asp-action="IndexSorted"
+                           asp-route-OrderBy="Code"
+                           asp-route-Order="Descending">(Desc)</a>
+                        break;
+                    default:
+                        <a asp-controller="PurchaseOrder"
+                           asp-action="IndexSorted"
+                           asp-route-OrderBy="Code"
+                           asp-route-Order="Ascending">(Asc)</a>
+                        break;
+                }
+            }
+            else
+            {
+                <a asp-controller="PurchaseOrder"
+                   asp-action="IndexSorted"
+                   asp-route-OrderBy="Code"
+                   asp-route-Order="NotSorted">(----)</a>
+            }
+
+        </div>
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.Index[0].DateRaised)
+            @if (Model.OrderBy == "DateRaised")
+            {
+                switch (@Model.Order)
+                {
+                    case "Ascending":
+                        <a asp-controller="PurchaseOrder"
+                           asp-action="IndexSorted"
+                           asp-route-OrderBy="DateRaised"
+                           asp-route-Order="Ascending">(Asc)</a>
+                        break;
+                    case "Descending":
+                        <a asp-controller="PurchaseOrder"
+                           asp-action="IndexSorted"
+                           asp-route-OrderBy="DateRaised"
+                           asp-route-Order="Descending">(Desc)</a>
+                        break;
+                    default:
+                        <a asp-controller="PurchaseOrder"
+                           asp-action="IndexSorted"
+                           asp-route-OrderBy="DateRaised"
+                           asp-route-Order="Ascending">(Asc)</a>
+                        break;
+                }
+            }
+            else
+            {
+                <a asp-controller="PurchaseOrder"
+                   asp-action="IndexSorted"
+                   asp-route-OrderBy="DateRaised"
+                   asp-route-Order="NotSorted">(----)</a>
+            }
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Index[0].Code)
-                @if (Model.OrderBy == "Code")
+        </div>
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.Index[0].Status)
+            @if (Model.OrderBy == "Status")
+            {
+                switch (@Model.Order)
                 {
-                    switch (@Model.Order)
-                    {
-                        case "Ascending":
-              
-                    <a asp-controller="PurchaseOrder"
-                       asp-action="IndexSorted"
-                       asp-route-OrderBy="Code"
-                       asp-route-Order="Ascending" >&#8679;</a>
-          
-                    break;
-                
+                    case "Ascending":
+                        <a asp-controller="PurchaseOrder"
+                           asp-action="IndexSorted"
+                           asp-route-OrderBy="Status"
+                           asp-route-Order="Ascending">(Asc)</a>
+                        break;
+                    case "Descending":
+                        <a asp-controller="PurchaseOrder"
+                           asp-action="IndexSorted"
+                           asp-route-OrderBy="Status"
+                           asp-route-Order="Descending">(Desc)</a>
+                        break;
+                    default:
+                        <a asp-controller="PurchaseOrder"
+                           asp-action="IndexSorted"
+                           asp-route-OrderBy="Status"
+                           asp-route-Order="Ascending">(Asc)</a>
+                        break;
+                }
+            }
+            else
+            {
+                <a asp-controller="PurchaseOrder"
+                   asp-action="IndexSorted"
+                   asp-route-OrderBy="Status"
+                   asp-route-Order="NotSorted">(----)</a>
+            }
 
-                           
-                        case "Descending":
-                            <a asp-controller="PurchaseOrder"
-                               asp-action="IndexSorted"
-                               asp-route-OrderBy="Code"
-                               asp-route-Order="Descending">&#8681;</a>
-                            break;
-                        default:
-                            <a asp-controller="PurchaseOrder"
-                               asp-action="IndexSorted"
-                               asp-route-OrderBy="Code"
-                               asp-route-Order="Ascending">&#8679;</a>
-                            break;
-                    }
-                }
-                else
-                {
-                    <a asp-controller="PurchaseOrder"
-                       asp-action="IndexSorted"
-                       asp-route-OrderBy="Code"
-                       asp-route-Order="NotSorted">&#9608;</a>
-                }
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Index[0].DateRaised)
-                @if (Model.OrderBy == "DateRaised")
-                {
-                    switch (@Model.Order)
-                    {
-                        case "Ascending":
-                            <a asp-controller="PurchaseOrder"
-                               asp-action="IndexSorted"
-                               asp-route-OrderBy="DateRaised"
-                               asp-route-Order="Ascending">&#8679;</a>
-                            break;
-                        case "Descending":
-                            <a asp-controller="PurchaseOrder"
-                               asp-action="IndexSorted"
-                               asp-route-OrderBy="DateRaised"
-                               asp-route-Order="Descending">&#8681;</a>
-                            break;
-                        default:
-                            <a asp-controller="PurchaseOrder"
-                               asp-action="IndexSorted"
-                               asp-route-OrderBy="DateRaised"
-                               asp-route-Order="Ascending">&#8679;</a>
-                            break;
-                    }
-                }
-                else
-                {
-                    <a asp-controller="PurchaseOrder"
-                       asp-action="IndexSorted"
-                       asp-route-OrderBy="DateRaised"
-                       asp-route-Order="NotSorted">&#9608;</a>
-                }
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Index[0].DateRequiredBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Index[0].Status)
-                @if (Model.OrderBy == "Status")
-                {
-                    switch (@Model.Order)
-                    {
-                        case "Ascending":
-                            <a asp-controller="PurchaseOrder"
-                               asp-action="IndexSorted"
-                               asp-route-OrderBy="Status"
-                               asp-route-Order="Ascending">&#8679;</a>
-                            break;
-                        case "Descending":
-                            <a asp-controller="PurchaseOrder"
-                               asp-action="IndexSorted"
-                               asp-route-OrderBy="Status"
-                               asp-route-Order="Descending">&#8681;</a>
-                            break;
-                        default:
-                            <a asp-controller="PurchaseOrder"
-                               asp-action="IndexSorted"
-                               asp-route-OrderBy="Status"
-                               asp-route-Order="Ascending">&#8679;</a>
-                            break;
-                    }
-                }
-                else
-                {
-                    <a asp-controller="PurchaseOrder"
-                       asp-action="IndexSorted"
-                       asp-route-OrderBy="Status"
-                       asp-route-Order="NotSorted">&#9608;</a>
-                }
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Index[0].Value)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var Ln in Model.Index)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => Ln.Code)
+        </div>
+        <div class="col-md-2">
+            @Html.DisplayNameFor(model => model.Index[0].Value)
+        </div>
+    </div>
 
-                </td>
-                <td>
+</div>
+
+<div class="setverticalscroll" style="height:500px;">   
+
+    @foreach (var Ln in Model.Index)
+    {
+
+        <div class="displaybox">
+            <div class="row ">
+                <div class="col-md-2">
+                    <a asp-action="Edit" asp-route-id="@Ln.PurchaseOrderID">@Html.DisplayFor(modelItem => Ln.Code)</a>
+                </div>
+                <div class="col-md-2">
                     @Html.DisplayFor(modelItem => Ln.DateRaised)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Ln.DateRequiredBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Ln.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Ln.Value)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@Ln.PurchaseOrderID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@Ln.PurchaseOrderID">Details</a> |
-                    <a asp-action="Status" asp-route-id="@Ln.PurchaseOrderID">Alter Status</a>|
+                </div>
+                <div class="col-md-2">
+                    <a asp-action="Status" asp-route-id="@Ln.PurchaseOrderID"> @Html.DisplayFor(modelItem => Ln.Status)</a>
+                </div>
+                <div class="col-md-2">
+                    @Html.DisplayFor(model => Ln.Value)
+                </div>
+
+                <div class="col-md-2">
                     <a asp-action="EmailPO" asp-route-id="@Ln.PurchaseOrderID">Email PO</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+

@@ -1,7 +1,7 @@
 ﻿@model Models.ViewModels.PurchaseOrderViewModel
 <h1>Purchase order</h1>
+<h4 class="POheading" style="color:Red">This is an example PO do not act on it.</h4>
 <hr />
-
 
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <div class="row">
@@ -25,10 +25,6 @@
             <input asp-for="Status" class="form-control" disabled />
         </div>
     </div>
-</div>
-<div class="row">    
-    <div class="col-12"> <h2 class="POheading" style="color:Red">This is an example PO NOT an actual one.</h2></div>
-    
 </div>
 
 

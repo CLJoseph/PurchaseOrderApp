@@ -5,7 +5,5 @@ using System.Text;
 
 namespace DataAccess
 {
-    public class ApplicationRole:IdentityRole<Guid>
-    {
-    }
+    public class ApplicationRole:IdentityRole<Guid>   { }
 }

@@ -53,6 +53,13 @@ function ProcessSelection(element) {
                 alert("To needs to be set before Items can be added to the PO ");
             }
             break;
+        case "BudgetCodes":          
+            if (selection === "New Code")
+            {    
+                document.getElementById("ModalNewBudgetCodeInputid").value = "";
+                $('#ModalNewBudgetCode').modal('show');
+            }
+            break;
         default:
             alert("Opps " + element + " has not been defined!!!");
             break;
@@ -60,9 +67,12 @@ function ProcessSelection(element) {
 }
 function SavePOtoDatabase() {
     if (ValidateForm('PurchaseOrderFormid') === "Passed") {
-        if (confirm(" Save to database")) {
+        if (confirm("Save to database")) {
             // compose JSON object to submit to database.
             var POFormData = GetPOFormData(); 
+
+
+
             // now send to server to be saved in the database.
             var result = PostPOtoDatabase(POFormData);         
         }
@@ -111,7 +121,6 @@ function PopulateAddItemsToPOSelect(Organisationid) {
     xhr.open('get', url);
     xhr.send();
 }
-
 function TestValidateForm(FormName) {
     var ToReturn = "Passed";
     alert(" Validating form :" + FormName);
@@ -127,7 +136,6 @@ function TestValidateForm(FormName) {
     alert(" Validation complete ");
     // return ToReturn;
 }
-
 function ValidateForm(FormName) {
     $("form").removeData("validator").removeData("unobtrusiveValidation");
     //Parse the form again
@@ -140,7 +148,6 @@ function ValidateForm(FormName) {
         return "Failed";
     }
 }
-
 function Tohasbeenset() {
     // the length of a Guid as a string is 36 using that to check if the TO option has been set
     var test = document.getElementById("Toid").value;
@@ -149,7 +156,6 @@ function Tohasbeenset() {
     }
     return false;
 }
-
 function DisplayModalAddress(OpenedBy) {
     // set which select element opened the modal.
     document.getElementById("ModalNewAddressForm").setAttribute("data-OpenedBy", OpenedBy);
@@ -178,14 +184,37 @@ function DisplayModalAddress(OpenedBy) {
     PopulateAddressModal();
     $('#ModalNewAddress').modal('show');
 }
+
 function SaveAddressModal() {
 
     if (ValidateForm("ModalNewAddressForm") === "Passed") {
         var SavetoDb = PostAddresstoDatabase();
     }
 }
+function SaveBudgetCodeModal()
+{
+    if (ValidateForm("ModalNewBudgetCodeForm") === "Passed") {          
 
-
+        var url = '/PurchaseOrder/RegisterBudgetCode?BudgetCode=' + document.getElementById("ModalNewBudgetCodeInputid").value; 
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                //alert("Server response is :" + xhr.responseText);
+                if (xhr.responseText !== "Failure") {
+                    $('#ModalNewBudgetCode').modal('hide');
+                    var Opt1 = document.createElement("option");
+                    Opt1.text = document.getElementById("ModalNewBudgetCodeInputid").value;
+                    Opt1.value = xhr.responseText;
+                    Opt1.selected = false;
+                    document.getElementById("BudgetCodesid").add(Opt1);
+                    alert("Budget code registered");
+                }
+            }
+        };
+        xhr.open('get', url);
+        xhr.send();
+    }
+}
 function GetModalAddressData() {
     var ToReturn = "";
     ToReturn = ToReturn + document.getElementById("ModalNewAddressOrganisationid").value + "<br />";
@@ -210,8 +239,6 @@ function GetModalAddressData() {
     ToReturn = ToReturn + document.getElementById("ModalNewAddressCodeid").value;
     return ToReturn;
 }
-
-
 function GetModalAddressDataObject() {
     // define object
     var ToReturn =
@@ -246,7 +273,6 @@ function DisplayonView() {
    
 
 }
-
 function PopulateOrganisationDropDownLists(OptionValue) {
     var Opt1 = document.createElement("option");
     var AttributeValue = GetModalAddressData(); 
@@ -274,10 +300,6 @@ function PopulateOrganisationDropDownLists(OptionValue) {
     document.getElementById("InvoiceToid").add(Opt3);
   
 }
-
-
-
-
 function PostAddresstoDatabase() {
     var data = GetModalAddressDataObject();
     var url = '/PurchaseOrder/SaveOrganisation?Organisation=' + data.Organisation +
@@ -316,8 +338,6 @@ function PopulateAddressModal() {
     document.getElementById("ModalNewAddressLine5id").value = "Line 5";
     document.getElementById("ModalNewAddressCodeid").value = "Address Code";
 }
-
-
 function DisplayModalRegisterNewItem() {
      //before displaying the modal ensure all the data input and error fields 
      //are blank.
@@ -391,7 +411,6 @@ function GetItemFromDatabase(itemid) {
     xhr.open('get', url);
     xhr.send();
 }
-
 function CheckSelectset(elementid)
 {    var V = document.getElementById(elementid).value;
     if (V === "Select" || V === "New") {
@@ -402,39 +421,6 @@ function CheckSelectset(elementid)
         return "set";
     }   
 }
-//function ValidateForm(FormName) {
-//    //  alert(document.getElementById('Toid').value);
-
-//    var Valid = "True";
-//    if (CheckSelectset('Toid') === "Not set")
-//    {
-//        document.getElementById('ToSpan').innerHTML = "Required value";
-//        Valid = "False";
-//    }
-//    if (CheckSelectset('InvoiceToid') === "Not set") {
-//        document.getElementById('InvoiceToSpan').innerHTML = "Required value";
-//        Valid = "False";
-//    }
-
-//    if (CheckSelectset('DeliverToid') === "Not set") {
-//        document.getElementById('DeliverToSpan').innerHTML = "Required value";
-//        Valid = "False";
-//    }
-
-//    //document.getElementById('InvoiceToSpan').innerHTML = "test value";
-//    //document.getElementById('DeliverToSpan').innerHTML = "test value";
-
-//    $("form").removeData("validator").removeData("unobtrusiveValidation");
-//    //Parse the form again
-//    $.validator.unobtrusive.parse($("form"));
-//    var Form = $("#" + FormName);
-//    if (Form.valid() && Valid ==="True") {
-//        return "Passed";
-//    }
-//    else {
-//        return "Failed";
-//    }
-//}
 function GetModalRegisterNewItemDataObject() {
     // define object
     var ToReturn =
@@ -537,7 +523,8 @@ function GetPOFormData() {
         "DateRequiredBy": document.getElementById("DateRequired").value,
         "Note": document.getElementById("Note").value,
         "To": document.getElementById("Toid").value,
-        "ToEmail": document.getElementById("Toid").selectedOptions[0].getAttribute("data-email"),
+        "ToEmail": document.getElementById("ToEmail").getAttribute("data-email"),
+        "ToPerson": document.getElementById("ToPerson").getAttribute("data-person"),
         "ToDetail": document.getElementById("ToDetailId").innerHTML,
         "DeliverTo": document.getElementById("DeliverToid").value,
         "DeliverToDetail": document.getElementById("DeliverToDetailId").innerHTML,
@@ -581,7 +568,6 @@ function GetPOFormData() {
     });
     return ToReturn;
 }
-
 function PostPOtoDatabase(PO) {
     var url = '/PurchaseOrder/SavePO'; 
     var xhr = new XMLHttpRequest();
@@ -603,7 +589,3 @@ function PostPOtoDatabase(PO) {
     };   
     xhr.send(JSON.stringify(PO));
 }
-
-
-
-

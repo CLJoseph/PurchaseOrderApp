@@ -13,6 +13,5 @@ namespace DataAccess
         public string PersonName { get; set; }
         public string Organisation { get; set; }
         public string Address { get; set; }
-
     }
 }

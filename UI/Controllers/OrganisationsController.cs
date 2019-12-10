@@ -66,7 +66,7 @@ namespace UI
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Contact,ContactEmail,ContactNo,Address,ApplicationUserId")] OrganisationViewModel FromView)
+        public async Task<IActionResult> Create([Bind("ApplicationUserId,Name,Contact,ContactEmail,ContactNo,Line01,Line02,Line03,Line04,Line05,Code")] OrganisationViewModel FromView)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +75,8 @@ namespace UI
                 _context.Organisations.Add(result);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }           
+            }
+            ViewData["ApplicationUserId"] = _userManager.GetUserId(User);
             return View(FromView);
         }
 
@@ -97,7 +98,7 @@ namespace UI
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Contact,ContactEmail,ContactNo,Address")] OrganisationViewModel FromView)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Contact,ContactEmail,ContactNo,Line01,Line02,Line03,Line04,Line05,Code")] OrganisationViewModel FromView)
         {
             if (ModelState.IsValid)
             {

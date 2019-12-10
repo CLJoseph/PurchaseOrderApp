@@ -17,25 +17,9 @@ namespace DataAccess
         public DbSet<TblOrganisation> Organisations { get; set; }
         public DbSet<TblOrganisationItem> OrganisationItems { get; set; }
         public DbSet<TblLookup> Lookups { get; set; }
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-
-        }
-
-        public ApplicationDbContext()
-        {
-        }
-
-        // only used in development
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database=aspnet-PO002; Trusted_Connection = True; MultipleActiveResultSets = true");
-        }
-
-
+            : base(options)   {}
+        public ApplicationDbContext() { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -52,7 +36,6 @@ namespace DataAccess
             modelBuilder.Entity<TblOrganisationItem>(ConfigureOrganisationItems);
             modelBuilder.Entity<TblLookup>(ConfigureLookup);
         }
-
         private void ConfigureLookup(EntityTypeBuilder<TblLookup> obj)
         {
             obj.ToTable("Lookup");
@@ -87,7 +70,6 @@ namespace DataAccess
             obj.Property(P => P.Price).HasMaxLength(15);
             obj.Property(P => P.Tax).HasMaxLength(15);
             obj.Property(P => P.Total).HasMaxLength(15);
-
         }
         private void ConfigurePurchaseOrders(EntityTypeBuilder<TblPurchaseOrder> obj)
         {
@@ -95,6 +77,8 @@ namespace DataAccess
             obj.Property(p => p.ID).IsRequired();             
             obj.Property(p => p.Code).HasMaxLength(15);
             obj.Property(p => p.To).HasMaxLength(255);
+            obj.Property(p => p.ToEmail).HasMaxLength(255);
+            obj.Property(p => p.ToPerson).HasMaxLength(255);
             obj.Property(p => p.ToDetail).HasMaxLength(255);
             obj.Property(p => p.DeliverTo).HasMaxLength(255);
             obj.Property(p => p.DeliverToDetail).HasMaxLength(500);
@@ -109,9 +93,6 @@ namespace DataAccess
             obj.Property(p => p.Total).HasMaxLength(15);
             obj.HasIndex(I => new {I.ApplicationUserId,I.Code}).IsUnique().HasName("IX_UniquePO").IsUnique();
         }
-        private void ConfigureApplicationUser(EntityTypeBuilder<ApplicationUser> obj)
-        {
-
-        }
+        private void ConfigureApplicationUser(EntityTypeBuilder<ApplicationUser> obj)   { }
     }
 }

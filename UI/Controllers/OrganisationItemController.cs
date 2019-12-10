@@ -73,8 +73,7 @@ namespace UI.Controllers
         public async Task<IActionResult> Create([Bind("Name,Brand,Code,Description,Price,TaxRate,ID,RowVersionNo,OrganisationId")] OrganisationItemViewModel Item)
         {
             if (ModelState.IsValid)
-            {
-               
+            {               
                 Item.Id = Guid.NewGuid().ToString();
                 var result =   OrgItemDTO.ToTableModel(Item);           
                 result.TblOrganisationId = Guid.Parse(Item.OrganisationId);

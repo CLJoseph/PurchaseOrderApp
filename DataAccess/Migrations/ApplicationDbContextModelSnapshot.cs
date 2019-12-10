@@ -246,7 +246,11 @@ namespace DataAccess.Migrations
                     b.Property<string>("ToDetail")
                         .HasMaxLength(255);
 
-                    b.Property<string>("ToEmail");
+                    b.Property<string>("ToEmail")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("ToPerson")
+                        .HasMaxLength(255);
 
                     b.Property<string>("Total")
                         .HasMaxLength(15);

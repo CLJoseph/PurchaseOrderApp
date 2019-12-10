@@ -8,7 +8,7 @@ namespace Repository
 {
     public interface ILookupRepository : IRepository<TblLookup>
     {
-        IEnumerable<TblLookup> GetLookups(string Lookup);
+        IEnumerable<TblLookup> GetLookups(string Lookup, string value);
         List<string> GetLookuplist(string Lookup);
 
     }
@@ -27,7 +27,9 @@ namespace Repository
         public List<string> GetLookuplist(string Lookup)
         {
          
-            List<string> ToReturn = new List<string>(); 
+            List<string> ToReturn = new List<string>();
+            ToReturn.Add("Select Budget Code");
+            ToReturn.Add("New Code");
 
             var result = FindRecords(x => x.Lookup == _applicationUser.Id.ToString() +"_" +Lookup);
             if (result != null)
@@ -38,11 +40,16 @@ namespace Repository
                 }
             }
             return ToReturn;
-        }
+        }      
 
         public IEnumerable<TblLookup> GetLookups(string Lookup)
         {
             return FindRecords(x => x.Lookup == Lookup);
+        }
+
+        public IEnumerable<TblLookup> GetLookups(string Lookup, string value)
+        {
+            throw new NotImplementedException();
         }
     }
 }
